@@ -1,0 +1,31 @@
+#!/bin/bash
+
+cd /var/www/html
+
+#Clonar
+
+sudo git clone -b MOODLE_405_STABLE git://git.moodle.org/moodle.git
+
+#Dar permiso
+
+sudo chown -R root /var/www/html/moodle
+sudo chmod -R 0755 /var/www/html/moodle
+
+#Crear moodledata
+
+sudo mkdir /var/www/html/moodledata
+
+sudo chmod 0777 /var/www/html/moodledata
+
+#Dar permiso a apache sobre directorio
+
+sudo chown www-data /var/www/html/moodle
+
+#Posicionarse en moodledata
+
+cd /var/www/html/moodle/admin/cli
+
+sudo -u www-data /usr/bin/php install.php
+
+chown -R root /var/www/html/moodle
+
